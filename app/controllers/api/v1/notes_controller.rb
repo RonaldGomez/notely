@@ -23,7 +23,7 @@ module Api
         @note = Note.new(note_params)
 
         if @note.save
-          render json: @note, status: :created, location: @note
+          render json: @note, status: :created, location: api_v1_note_path(@note)#@note
         else
           render json: @note.errors, status: :unprocessable_entity
         end
@@ -56,7 +56,7 @@ module Api
         end
 
         def note_params
-          params.require(:note).permit(:title, :body, :category_id)
+          params.require(:note).permit(:title, :body, :category_id) if params[:note]
         end
     end
   end
