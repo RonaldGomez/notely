@@ -1,6 +1,6 @@
 class Note < ActiveRecord::Base
 	belongs_to :category
-	validates :title
-	validates :body
-	validates :category_id
+	validates :title, presence: true
+	validates :body, presence: true
+	validates :category_id, presence: true
 end
