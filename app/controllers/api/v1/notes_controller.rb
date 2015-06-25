@@ -2,13 +2,15 @@ module Api
   module V1
     class NotesController < ApplicationController
       before_action :set_note, only: [:show, :update, :destroy]
-
+      
       # GET /notes
       # GET /notes.json
       def index
-        @notes = Note.all
+        # @notes = Note.all
 
-        render json: @notes
+        # render json: @notes
+        serialized_notes = ActiveModel::ArraySerializer.new(Note.all, each_serializer: NoteSerializer)
+        render json: serialized_notes
       end
 
       # GET /notes/1
